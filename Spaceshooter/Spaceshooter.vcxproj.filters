@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{5b2cd3cc-b59a-4e16-b79f-2f80aa3e26e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Font">
+      <UniqueIdentifier>{c8589e6f-5a1d-45ce-a580-9a59dadcaeb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Audio">
+      <UniqueIdentifier>{be91a6b4-3e0f-4ab6-91e2-201c62f891e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Art">
+      <UniqueIdentifier>{c8fe4c59-e005-47d8-8f53-1818b8fb4af5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{ee4aac97-d0d7-4b4b-a8f4-4114972f45fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{225d49e5-bcf5-4473-847c-2032c2e037e9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\Audio.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Display.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Keyboard.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\ResourceManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\StateMachine.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Background.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Comet.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\EnemySpaceship.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Explosion.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameConstants.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameLogicManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObject.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\HeadsUpDisplay.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\main.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Missile.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PowerUp.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Spaceship.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Audio.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Display.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Keyboard.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ResourceManager.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\SpriteMemoryPool.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\StateMachine.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\collision.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\constants.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\mat3.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\math_streams.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\math2d.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\vec3.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Background.hpp">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Comet.hpp">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\EnemySpaceship.hpp">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Explosion.hpp">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameConstants.hpp">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameLogicManager.hpp">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameObject.hpp">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\HeadsUpDisplay.hpp">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Missile.hpp">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PowerUp.hpp">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Spaceship.hpp">
+      <Filter>Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Font\transformers.ttf">
+      <Filter>Resource Files\Font</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Audio\bullet.ogg">
+      <Filter>Resource Files\Audio</Filter>
+    </None>
+    <None Include="Audio\explosion.ogg">
+      <Filter>Resource Files\Audio</Filter>
+    </None>
+    <None Include="Audio\power-up.ogg">
+      <Filter>Resource Files\Audio</Filter>
+    </None>
+    <None Include="Audio\song3.ogg">
+      <Filter>Resource Files\Audio</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Art\6dots.png">
+      <Filter>Resource Files\Art</Filter>
+    </Image>
+    <Image Include="Art\960background.png">
+      <Filter>Resource Files\Art</Filter>
+    </Image>
+    <Image Include="Art\comet.png">
+      <Filter>Resource Files\Art</Filter>
+    </Image>
+    <Image Include="Art\enemyspaceship1.png">
+      <Filter>Resource Files\Art</Filter>
+    </Image>
+    <Image Include="Art\explosion.png">
+      <Filter>Resource Files\Art</Filter>
+    </Image>
+    <Image Include="Art\foreground.png">
+      <Filter>Resource Files\Art</Filter>
+    </Image>
+    <Image Include="Art\french_key.png">
+      <Filter>Resource Files\Art</Filter>
+    </Image>
+    <Image Include="Art\green_blast1.png">
+      <Filter>Resource Files\Art</Filter>
+    </Image>
+    <Image Include="Art\green_power_up.png">
+      <Filter>Resource Files\Art</Filter>
+    </Image>
+    <Image Include="Art\middleground.png">
+      <Filter>Resource Files\Art</Filter>
+    </Image>
+    <Image Include="Art\middleground2.png">
+      <Filter>Resource Files\Art</Filter>
+    </Image>
+    <Image Include="Art\red_blast2.png">
+      <Filter>Resource Files\Art</Filter>
+    </Image>
+    <Image Include="Art\spaceship.png">
+      <Filter>Resource Files\Art</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
