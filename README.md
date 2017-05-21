@@ -6,7 +6,9 @@ Some unnecessary optimizations might be found in the codebase (such as cache-fri
 
 # SETUP #
 
-It was tested with Visual Studio 15. After compiling, copy allegro monolith-5.1.dll from Allegro folder to Release.
+It was tested with Visual Studio 15. 
+Download Allegro 5.1 version from Allegro Game Programming Libary site, and place /include and /lib in Spaceshooter/Allegro folder.
+After compiling, copy allegro monolith-5.1.dll from Allegro folder to Release.
 Unce upon a time, this also worked on Linux, however I had too much problems with library linking and I have abandoned it.
 
 # ART AND OTHER #
