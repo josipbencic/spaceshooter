@@ -1,7 +1,7 @@
 # README #
 
 A simple Space Shooter 2D game I have made in high-school. It was based on Mike Geig's "Introduction to 2D game programming with Allegro" tutorial.
-Everything was coded in C or C++03 originally, later I refactored C parts to pure C++.
+Everything was coded in C or C++03 originally, later I refactored C parts to C++.
 Some unnecessary optimizations might be found in the codebase (such as cache-friendly containers). They are not needed, however I wanted to practice the implementation.
 
 # SETUP #
