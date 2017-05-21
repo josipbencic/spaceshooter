@@ -14,66 +14,66 @@ using namespace math;
 
 namespace sprites {
 
-	void get_health_powerup(Spaceship& ship) {
-		ship.set_health(ship.get_health() + POWERUP_HEALTH_AMOUNT);
-	}
-	
-	void get_double_powerup(Spaceship& ship) {
-		ship.set_current_missile_type(MissileType::DOUBLE);
-		ship.reset_power_up_timer(POWERUP_DOUBLE_DURATION);
-	}
-	
-	void get_strong_powerup(Spaceship& ship) {
-		ship.set_current_missile_type(MissileType::STRONG_GREEN);
-		ship.reset_power_up_timer(POWERUP_STRONG_DURATION);
-	}
-	
-	const float PowerUp::FRAME_RADIUS = 30.0f;
+  void get_health_powerup(Spaceship& ship) {
+    ship.set_health(ship.get_health() + POWERUP_HEALTH_AMOUNT);
+  }
 
-	PowerUp::PowerUp(
-		const Display& dsp,
-		vec3 pos, 
-		ALLEGRO_BITMAP* img_,
-		void (*get_effect_func)(Spaceship&)) 
-	: GameObject(pos, vec3(-1.0f, 0.0f, 0.0f), true) 
-	, time(al_get_time())
-	, frame_count(0.0)
-	, rotation_angle(0.0f)
-	, img(img_)
-	, get_effect(NULL) {
+  void get_double_powerup(Spaceship& ship) {
+    ship.set_current_missile_type(MissileType::DOUBLE);
+    ship.reset_power_up_timer(POWERUP_DOUBLE_DURATION);
+  }
 
-		assert(get_effect_func != NULL);
-		get_effect = get_effect_func;
-	}
+  void get_strong_powerup(Spaceship& ship) {
+    ship.set_current_missile_type(MissileType::STRONG_GREEN);
+    ship.reset_power_up_timer(POWERUP_STRONG_DURATION);
+  }
 
-	PowerUp::PowerUp(const PowerUp& src)
-		: GameObject(src)
-		, time(al_get_time())
-		, frame_count(0.0)
-		, rotation_angle(0.0f)
-		, img(src.img)
-		, get_effect(NULL) {
-	
-		assert (src.get_effect != NULL);
-		get_effect = src.get_effect;
-	}
+  const float PowerUp::FRAME_RADIUS = 30.0f;
 
-	void PowerUp::update() {
+  PowerUp::PowerUp(
+    const Display& dsp,
+    vec3 pos,
+    ALLEGRO_BITMAP* img_,
+    void (*get_effect_func)(Spaceship&))
+  : GameObject(pos, vec3(-1.0f, 0.0f, 0.0f), true)
+  , time(al_get_time())
+  , frame_count(0.0)
+  , rotation_angle(0.0f)
+  , img(img_)
+  , get_effect(NULL) {
 
-		is_alive = (pos.x + FRAME_RADIUS >= 0.0f);
+    assert(get_effect_func != NULL);
+    get_effect = get_effect_func;
+  }
 
-		float delta_time = al_get_time() - time;
+  PowerUp::PowerUp(const PowerUp& src)
+    : GameObject(src)
+    , time(al_get_time())
+    , frame_count(0.0)
+    , rotation_angle(0.0f)
+    , img(src.img)
+    , get_effect(NULL) {
 
-		rotation_angle += delta_time * POWERUP_VELOCITY / (PI * 8);	
-		mat3 translation = translate(delta_time * POWERUP_VELOCITY * dir);
-		
-		pos = translation * pos;
+    assert (src.get_effect != NULL);
+    get_effect = src.get_effect;
+  }
 
-		time += delta_time;
-	}
+  void PowerUp::update() {
 
-	void PowerUp::render() const {
+    is_alive = (pos.x + FRAME_RADIUS >= 0.0f);
 
-		al_draw_rotated_bitmap(img, 25.0f, 25.0f, pos.x, pos.y, rotation_angle, 0);
-	}
+    float delta_time = al_get_time() - time;
+
+    rotation_angle += delta_time * POWERUP_VELOCITY / (PI * 8);
+    mat3 translation = translate(delta_time * POWERUP_VELOCITY * dir);
+
+    pos = translation * pos;
+
+    time += delta_time;
+  }
+
+  void PowerUp::render() const {
+
+    al_draw_rotated_bitmap(img, 25.0f, 25.0f, pos.x, pos.y, rotation_angle, 0);
+  }
 }

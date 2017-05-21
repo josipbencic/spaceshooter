@@ -11,135 +11,134 @@
 
 
 namespace loop_tools {
-	class Display;
+  class Display;
 }
 
 namespace sprites {
 
-	class Missile;
-	class StrongMissile;
-	class Spaceship;
+  class Missile;
+  class StrongMissile;
+  class Spaceship;
 
-	class EnemySpaceship : public GameObject {
-	public:
+  class EnemySpaceship : public GameObject {
+  public:
 
-		/*
-			Currently, all enemy spaceships have the same bitmap.
-		*/
-		EnemySpaceship(
-			const math::vec3			pos,
-			const loop_tools::Display&	display,
-			Spaceship&					ship,
-			ALLEGRO_BITMAP*				img);
+    /*
+      Currently, all enemy spaceships have the same bitmap.
+    */
+    EnemySpaceship(
+      const math::vec3      pos,
+      const loop_tools::Display&  display,
+      Spaceship&          ship,
+      ALLEGRO_BITMAP*       img);
 
-		EnemySpaceship(const EnemySpaceship& src);
+    EnemySpaceship(const EnemySpaceship& src);
 
-		virtual ~EnemySpaceship();
+    virtual ~EnemySpaceship();
 
-		virtual void shoot() = 0;
+    virtual void  shoot() = 0;
 
-		virtual void	render() const;
-		void			render_hp_bars() const;
-		virtual void	update() {}
-		virtual void	move() = 0;
-		virtual int		score() const = 0;
-		
-		math::vec3 AABB_min() const {
-			return math::vec3(pos.x - BOUND, pos.y - BOUND, 1.0f);
-		}
+    virtual void  render() const;
+    void          render_hp_bars() const;
+    virtual void  update() {}
+    virtual void  move() = 0;
+    virtual int   score() const = 0;
 
-		math::vec3 AABB_max() const {
-			return math::vec3(pos.x + BOUND, pos.y + BOUND, 1.0f);
-		}
+    inline math::vec3 AABB_min() const {
+      return math::vec3(pos.x - BOUND, pos.y - BOUND, 1.0f);
+    }
 
-		void take_damage(unsigned damage = 1) {
-			health -= damage;
-			is_alive = health > 0;
-		}
+    inline math::vec3 AABB_max() const {
+      return math::vec3(pos.x + BOUND, pos.y + BOUND, 1.0f);
+    }
 
-	protected:
-		const loop_tools::Display&	display;
-		Spaceship&					ship;
+    inline void take_damage(unsigned damage = 1) {
+      health -= damage;
+      is_alive = health > 0;
+    }
 
-		const float			BOUND;
-		double				time;
-		double				last_shot;
-		int					health;
-		unsigned			current_frame;
-		unsigned			animation_row;
-		ALLEGRO_BITMAP*		img;
+  protected:
+    const loop_tools::Display&  display;
+    Spaceship&          ship;
 
-		static const int	FRAME_WIDTH = 43;
-		static const int	FRAME_HEIGHT = 41;
-		static const int	ANIMATION_COLUMNS = 3;
-		static const int	MAX_FRAME = 3;
-	};
+    const float     BOUND;
+    double        time;
+    double        last_shot;
+    int         health;
+    unsigned      current_frame;
+    unsigned      animation_row;
+    ALLEGRO_BITMAP*   img;
 
-	class BoringEnemySpaceship : public EnemySpaceship {
-	public:
-		BoringEnemySpaceship(
-			const math::vec3						pos,
-			const loop_tools::Display&				display,
-			Spaceship&								ship,
-			loop_tools::SpriteMemoryPool<Missile>&	missiles,
-			ALLEGRO_BITMAP*							img);
+    static const int  FRAME_WIDTH = 43;
+    static const int  FRAME_HEIGHT = 41;
+    static const int  ANIMATION_COLUMNS = 3;
+    static const int  MAX_FRAME = 3;
+  };
 
-		BoringEnemySpaceship(const BoringEnemySpaceship& src);
+  class BoringEnemySpaceship : public EnemySpaceship {
+  public:
+    BoringEnemySpaceship(
+      const math::vec3            pos,
+      const loop_tools::Display&        display,
+      Spaceship&                ship,
+      loop_tools::SpriteMemoryPool<Missile>&  missiles,
+      ALLEGRO_BITMAP*             img);
 
-		virtual ~BoringEnemySpaceship();
+    BoringEnemySpaceship(const BoringEnemySpaceship& src);
 
-		virtual void move();
-		virtual void shoot();
-		virtual void update();
-		virtual int score() const {
-			return BORING_ENEMY_SCORE;
-		}
+    virtual ~BoringEnemySpaceship();
 
-	private:
-		loop_tools::SpriteMemoryPool<Missile>& missiles;
+    virtual void move();
+    virtual void shoot();
+    virtual void update();
+    virtual int score() const {
+      return BORING_ENEMY_SCORE;
+    }
 
-		math::mat3 translation;
-	};
+  private:
+    loop_tools::SpriteMemoryPool<Missile>& missiles;
 
-	class StrongEnemySpaceship : 
-		public EnemySpaceship {
-	
-	public:
-		StrongEnemySpaceship(
-			const math::vec3								starting_pos,
-			const loop_tools::Display&						display,
-			Spaceship&										ship,
-			loop_tools::SpriteMemoryPool<StrongMissile>&	missiles,
-			ALLEGRO_BITMAP*									img,
-			ALLEGRO_BITMAP*									missile_img);
+    math::mat3 translation;
+  };
 
-		StrongEnemySpaceship(const StrongEnemySpaceship& src);
+  class StrongEnemySpaceship :
+    public EnemySpaceship {
 
-		virtual ~StrongEnemySpaceship();
+  public:
+    StrongEnemySpaceship(
+      const math::vec3                starting_pos,
+      const loop_tools::Display&            display,
+      Spaceship&                    ship,
+      loop_tools::SpriteMemoryPool<StrongMissile>&  missiles,
+      ALLEGRO_BITMAP*                 img,
+      ALLEGRO_BITMAP*                 missile_img);
 
-		virtual void shoot();
-		virtual void update();
-		virtual void move();
-		virtual int score() const {
-			return STRONG_ENEMY_SCORE;
-		}
+    StrongEnemySpaceship(const StrongEnemySpaceship& src);
 
-		static bool		free_sectors();
-		static short	next_sector;
-		static bool		taken_sectors[12];
+    virtual ~StrongEnemySpaceship();
 
-	private:
+    virtual void shoot();
+    virtual void update();
+    virtual void move();
+    virtual int score() const {
+      return STRONG_ENEMY_SCORE;
+    }
 
-		loop_tools::SpriteMemoryPool<StrongMissile>& missiles;
+    static bool   free_sectors();
+    static short  next_sector;
+    static bool   taken_sectors[12];
 
-		//	ORDER DEPENDECY
-		short sector;
-		math::vec3 starting_position;
-		math::vec3 final_position;
-		float lerp_factor;
+  private:
 
-		ALLEGRO_BITMAP* missile_img;
-	};
+    loop_tools::SpriteMemoryPool<StrongMissile>& missiles;
+
+    short             sector;
+    math::vec3        starting_position;
+    math::vec3        final_position;
+    float             lerp_factor;
+
+    ALLEGRO_BITMAP*   missile_img;
+  };
 
 }
 #endif

@@ -7,78 +7,78 @@
 #include "../Math/mat3.hpp"
 
 namespace loop_tools {
-	class Display;
+  class Display;
 }
 
 namespace sprites {
 
-	class Comet;
+  class Comet;
 
-	enum MissileType {
-		NORMAL,
-		DOUBLE,
-		STRONG_GREEN,
-		STRONG_RED
-	};
+  enum MissileType {
+    NORMAL,
+    DOUBLE,
+    STRONG_GREEN,
+    STRONG_RED
+  };
 
-	class Missile : public GameObject {
+  class Missile : public GameObject {
 
-	public:
-		Missile( 
-			math::vec3 pos,
-			math::vec3 dir,
-			const loop_tools::Display& display);
-		
-		Missile(const Missile& rhs);
+  public:
+    Missile(
+      math::vec3 pos,
+      math::vec3 dir,
+      const loop_tools::Display& display);
 
-		const Missile& operator= (const Missile& rhs);
+    Missile(const Missile& rhs);
 
-		virtual void update();
-		virtual void render() const;
-		
-		virtual int damage() const {
-			return MISSILE_DAMAGE_NORMAL;
-		}
+    const Missile& operator= (const Missile& rhs);
 
-		virtual float radius() const {
-			return 2.0f;
-		}
+    virtual void update();
+    virtual void render() const;
 
-	private:
-		const loop_tools::Display&	display;
-		double						time;
+    virtual int damage() const {
+      return MISSILE_DAMAGE_NORMAL;
+    }
 
-		math::mat3					translation;
+    virtual float radius() const {
+      return 2.0f;
+    }
+
+  private:
+    const loop_tools::Display&  display;
+    double            time;
+
+    math::mat3          translation;
     };
 
-	class StrongMissile : public Missile {
-		friend class StrongEnemySpaceship;
+  class StrongMissile : public Missile {
+    friend class StrongEnemySpaceship;
 
-	public:
-		StrongMissile(	
-			math::vec3 pos,
-			math::vec3 dir,
-			const loop_tools::Display& __display,
-			ALLEGRO_BITMAP* bmp);
+  public:
+    StrongMissile(
+      math::vec3 pos,
+      math::vec3 dir,
+      const loop_tools::Display& __display,
+      ALLEGRO_BITMAP* bmp);
 
-		StrongMissile(const StrongMissile& rhs);
+    StrongMissile(const StrongMissile& rhs);
 
-		virtual ~StrongMissile();
+    virtual ~StrongMissile();
 
-		virtual void render() const;
-		virtual int damage() const {
-			return MISSILE_DAMAGE_STRONG;
-		}
-		virtual float radius() const {
-			return MISSILE_HEIGHT;
-		}
+    virtual void render() const;
+    virtual int damage() const {
+      return MISSILE_DAMAGE_STRONG;
+    }
+    virtual float radius() const {
+      return MISSILE_HEIGHT;
+    }
 
-	private:
-		static const float MISSILE_WIDTH;
-		static const float MISSILE_HEIGHT;
+  private:
+    static const float MISSILE_WIDTH;
+    static const float MISSILE_HEIGHT;
 
-		ALLEGRO_BITMAP* bmp;
-	};
+    ALLEGRO_BITMAP* bmp;
+  };
 
 }
 

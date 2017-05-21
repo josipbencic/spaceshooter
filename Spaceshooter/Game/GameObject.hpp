@@ -7,56 +7,56 @@
 #include "../Math/vec3.hpp"
 
 /*
-	Base class used to derive all sprites within the game.
-	It provides sprite position and move vector. 
+  Base class used to derive all sprites within the game.
+  It provides sprite position and move vector.
 */
 
 namespace sprites {
 
-	class GameObject {
+  class GameObject {
 
-	public:
+  public:
 
-		GameObject(
-			math::vec3 position,
-			math::vec3 direction,
-			bool alive = false);
+    GameObject(
+      math::vec3 position,
+      math::vec3 direction,
+      bool alive = false);
 
-		GameObject(const GameObject& src);
+    GameObject(const GameObject& src);
 
-		virtual ~GameObject() {}
+    virtual ~GameObject() {}
 
-		virtual void update() {};
-		
-		/*
-			Draws a rectangle where a sprite should be.
-			Most derived classes  will override this function.
-		*/
-		virtual void render() const;
+    virtual void update() {};
 
-		const math::vec3& get_pos() const {
-			return pos;
-		}
+    /*
+      Draws a rectangle where a sprite should be.
+      Most derived classes  will override this function.
+    */
+    virtual void render() const;
 
-		bool alive() const {
-			return is_alive;
-		}
+    const math::vec3& get_pos() const {
+      return pos;
+    }
+
+    bool alive() const {
+      return is_alive;
+    }
 
 
-		void set_alive(bool alive) {
-			is_alive = alive;
-		} 
+    void set_alive(bool alive) {
+      is_alive = alive;
+    }
 
-	protected:
+  protected:
 
-		bool is_alive;
+    bool is_alive;
 
-		//	Coordinates
-		math::vec3 pos;
+    //  Coordinates
+    math::vec3 pos;
 
-		//	direction
-		math::vec3 dir;
-	};
+    //  direction
+    math::vec3 dir;
+  };
 }
 
 #endif // BASE_HPP_INCLUDED

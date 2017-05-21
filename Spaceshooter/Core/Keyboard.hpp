@@ -7,66 +7,66 @@
 #include <cstring>
 
 namespace sprites {
-	class Spaceship;
+  class Spaceship;
 }
 
 namespace loop_tools {
 
-	class Audio;
+  class Audio;
 
-	enum Action {
-		NOTHING = 0,
-		UP = 1,
-		DOWN = 2,
-		ENTER = 3,
-		ESCAPE = 4
-	};
+  enum Action {
+    NOTHING = 0,
+    UP = 1,
+    DOWN = 2,
+    ENTER = 3,
+    ESCAPE = 4
+  };
 
-	/*
-		Keyboard class triggers actions and switches states.
-	*/
-	class Keyboard {
+  /*
+    Keyboard class triggers actions and switches states.
+  */
+  class Keyboard {
 
-	public:
-		Keyboard();
-		virtual ~Keyboard() {}
-		
-		Action update();
+  public:
+    Keyboard();
+    virtual ~Keyboard() {}
+    
+    Action update();
 
-	protected:
-		virtual Action input() = 0;
-		
-		ALLEGRO_KEYBOARD_STATE  state;
+  protected:
+    virtual Action input() = 0;
+    
+    ALLEGRO_KEYBOARD_STATE  state;
 
-	private:
-		Keyboard(const Keyboard&);
-		const Keyboard& operator= (const Keyboard&) {}
-	};
+  private:
+    Keyboard(const Keyboard&);
+    const Keyboard& operator= (const Keyboard&) {}
+  };
 
-	class InterfaceKeyboard : public Keyboard {
-	public:
-		InterfaceKeyboard()
-			: Keyboard() {
+  class InterfaceKeyboard : public Keyboard {
+  public:
+    InterfaceKeyboard()
+      : Keyboard() {
 
-			memset(last_pressed, 0, sizeof last_pressed);
-		}
-	private:
-		virtual Action input();
+      memset(last_pressed, 0, sizeof last_pressed);
+    }
+  private:
+    virtual Action input();
 
-		bool last_pressed[8];
-	};
+    bool last_pressed[8];
+  };
 
-	class PlayingKeyboard : public Keyboard {
-	public:	
-		PlayingKeyboard(sprites::Spaceship& ship)
-			: Keyboard(), ship(ship)
-		{}
+  class PlayingKeyboard : public Keyboard {
+  public: 
+    PlayingKeyboard(sprites::Spaceship& ship)
+      : Keyboard(), ship(ship)
+    {}
 
-	private:
-		virtual Action input();
+  private:
+    virtual Action input();
 
-		sprites::Spaceship& ship;
-	};
+    sprites::Spaceship& ship;
+  };
 }
 
 #endif

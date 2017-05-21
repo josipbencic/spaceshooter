@@ -1,5 +1,5 @@
 /*
-	Author: Josip Bencic
+  Author: Josip Bencic
 */
 #include <cstdio>
 #include <cstdlib>
@@ -29,62 +29,62 @@ using namespace sprites;
 
 int main() {
 
-	__init_allegro__();
+  __init_allegro__();
 
-	Display			display;
-	Audio			audio;
-	ResourceManager resources;
+  Display     display;
+  Audio     audio;
+  ResourceManager resources;
 
-	StateMachine state_machine(display, audio, resources);
+  StateMachine state_machine(display, audio, resources);
 
     ALLEGRO_EVENT_QUEUE* event_queue = al_create_event_queue();
-	al_register_event_source(event_queue, al_get_keyboard_event_source());
-	al_register_event_source(event_queue, al_get_display_event_source(display.get_display()));
+  al_register_event_source(event_queue, al_get_keyboard_event_source());
+  al_register_event_source(event_queue, al_get_display_event_source(display.get_display()));
 
     srand(time(NULL));
 
     while(!state_machine.done) {
 
-		state_machine.update();
+    state_machine.update();
 
-		while ( !al_event_queue_is_empty(event_queue)) {
-			
-			ALLEGRO_EVENT ev;
-			al_get_next_event(event_queue, &ev);
+    while ( !al_event_queue_is_empty(event_queue)) {
 
-			if ( ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE ) {
-				state_machine.done = true;
-			} 
-		}
+      ALLEGRO_EVENT ev;
+      al_get_next_event(event_queue, &ev);
 
-		if ( state_machine.draw ) {
+      if ( ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE ) {
+        state_machine.done = true;
+      }
+    }
 
-			state_machine.render();
+    if ( state_machine.draw ) {
 
-			al_flip_display();
-			al_clear_to_color(al_map_rgb(0,0,0));
-		}
-	}
-	
-	al_destroy_event_queue(event_queue);
+      state_machine.render();
+
+      al_flip_display();
+      al_clear_to_color(al_map_rgb(0,0,0));
+    }
+  }
+
+  al_destroy_event_queue(event_queue);
 }
 
 
 void __init_allegro__() {
 
-	//  Allegro initialization
-	if ( !al_init() ) {
-		std::cout << "failed to init allegro!" << std::endl;
-		exit(-1);
-	}
+  //  Allegro initialization
+  if ( !al_init() ) {
+    std::cout << "failed to init allegro!" << std::endl;
+    exit(-1);
+  }
 
-	//	Allegro Add-on initializations
-	al_install_keyboard();
-	al_install_mouse();
-	al_install_audio();
-	al_init_acodec_addon();
-	al_init_image_addon();
-	al_init_font_addon();
-	al_init_ttf_addon();
-	al_init_primitives_addon();
+  //  Allegro Add-on initializations
+  al_install_keyboard();
+  al_install_mouse();
+  al_install_audio();
+  al_init_acodec_addon();
+  al_init_image_addon();
+  al_init_font_addon();
+  al_init_ttf_addon();
+  al_init_primitives_addon();
 }

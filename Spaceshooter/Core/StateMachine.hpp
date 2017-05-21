@@ -7,92 +7,86 @@
 #include "../Game/HeadsUpDisplay.hpp"
 
 namespace sprites {
-	class Spaceship;
+  class Spaceship;
 }
 
 namespace loop_tools {
 
-	class Display;
-	class Audio;
-	class ResourceManager;
+  class Display;
+  class Audio;
+  class ResourceManager;
 
-	enum State {
-		START = 0,
-		MM1 = 1,
-		MM2 = 2,
-		MM3 = 3,
-		OPT1 = 4,
-		OPT2 = 5,
-		OVER = 6,
-		PLAY = 7,
-		QUIT = 8,
-		SWAP = 9,
-		DIF1 = 10,
-		DIF2 = 11,
-		DIF3 = 12
-	};
+  enum State {
+    START = 0,
+    MM1 = 1,
+    MM2 = 2,
+    MM3 = 3,
+    OPT1 = 4,
+    OPT2 = 5,
+    OVER = 6,
+    PLAY = 7,
+    QUIT = 8,
+    SWAP = 9,
+    DIF1 = 10,
+    DIF2 = 11,
+    DIF3 = 12
+  };
 
-	enum Difficulty {
-		EASY = 1,
-		MEDIUM = 2,
-		HARD = 3
-	};
+  enum Difficulty {
+    EASY = 1,
+    MEDIUM = 2,
+    HARD = 3
+  };
 
-	class StateMachine {
-		friend class Keyboard;
-	public:
-		StateMachine(
-			Display& display,
-			Audio& audio,
-			ResourceManager& res);
+  class StateMachine {
 
-		~StateMachine();
+    friend class Keyboard;
+  public:
+    StateMachine(
+      Display& display,
+      Audio& audio,
+      ResourceManager& res);
 
-		void set_state(State new_state);
-		State get_state() const {
-			return state;
-		}
-		void render() const;
-		void update();
+    ~StateMachine();
 
-		bool done;
-		mutable bool draw;
+    inline State get_state() const { return state; }
+    void set_state(State new_state);
+    void render() const;
+    void update();
 
-	private:
+    bool done;
+    mutable bool draw;
 
-		/*
-			Graph representing state swapping
-		*/
-		static const State adjecency_list[][13];
+  private:
 
-		Display&			display;
-		Audio&				audio;
-		ResourceManager&	res;
+    /* Graph representing state swapping */
+    static const State  adjecency_list[][13];
 
+    Display&            display;
+    Audio&              audio;
+    ResourceManager&    res;
 
-		//	ORDER DEPENDENCY
-		bool				health_bars;
-		Difficulty			difficulty;
+    bool                health_bars;
+    Difficulty          difficulty;
 
-		GameLogicManager	logic_manager;
+    GameLogicManager    logic_manager;
 
-		sprites::Spaceship&	ship;
+    sprites::Spaceship& ship;
 
-		State				state;
+    State               state;
 
-		PlayingKeyboard		playingKey;
-		InterfaceKeyboard	interfaceKey;
-		Keyboard*			keyboard;
+    PlayingKeyboard     playingKey;
+    InterfaceKeyboard   interfaceKey;
+    Keyboard*           keyboard;
 
-		//	ORDER DEPENDENCY
-		TitleHUD			titleHUD;
-		MainMenuHUD			mainMenuHUD;
-		OptionsHUD			optionsHUD;
-		PlayingHUD			playingHUD;
-		GameOverHUD			gameOverHUD;
+    TitleHUD            titleHUD;
+    MainMenuHUD         mainMenuHUD;
+    OptionsHUD          optionsHUD;
+    PlayingHUD          playingHUD;
+    GameOverHUD         gameOverHUD;
 
-		// needs to be last
-		HeadsUpDisplay*		HUD;
-	};
+    // needs to be last
+    HeadsUpDisplay*     HUD;
+  };
 }
 #endif

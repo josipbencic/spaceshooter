@@ -18,72 +18,69 @@ using namespace math;
 
 namespace loop_tools {
 
-	Keyboard::Keyboard() {
+  Keyboard::Keyboard() {
+    memset(&state, 0, sizeof state);
+  }
 
-		memset(&state, 0, sizeof state);
-	}
+  Action Keyboard::update() {
+    al_get_keyboard_state(&state);
+    return input();
+  }
 
-	Action Keyboard::update() {
-		
-		al_get_keyboard_state(&state);
+  Action InterfaceKeyboard::input() {
 
-		return input();
-	}
+    Action ret = Action::NOTHING;
 
-	Action InterfaceKeyboard::input() {
-		
-		Action ret = Action::NOTHING;
+    if (!al_key_down(&state, ALLEGRO_KEY_ESCAPE)
+      && last_pressed[Action::ESCAPE]) 
+      ret = Action::ESCAPE;
 
-		if (!al_key_down(&state, ALLEGRO_KEY_ESCAPE)
-			&& last_pressed[Action::ESCAPE]) 
-			ret = Action::ESCAPE;
+    if (!al_key_down(&state, ALLEGRO_KEY_ENTER)
+      && last_pressed[Action::ENTER]) 
+      ret =  Action::ENTER;
 
-		if (!al_key_down(&state, ALLEGRO_KEY_ENTER)
-			&& last_pressed[Action::ENTER]) 
-			ret =  Action::ENTER;
+    if (!al_key_down(&state, ALLEGRO_KEY_UP)
+      && last_pressed[Action::UP]) 
+      ret =  Action::UP;
 
-		if (!al_key_down(&state, ALLEGRO_KEY_UP)
-			&& last_pressed[Action::UP]) 
-			ret =  Action::UP;
+    if (!al_key_down(&state, ALLEGRO_KEY_DOWN) 
+      && last_pressed[Action::DOWN])
+      ret =  Action::DOWN;
 
-		if (!al_key_down(&state, ALLEGRO_KEY_DOWN) 
-			&& last_pressed[Action::DOWN])
-			ret =  Action::DOWN;
+    last_pressed[Action::DOWN] = al_key_down(&state, ALLEGRO_KEY_DOWN);
+    last_pressed[Action::UP] = al_key_down(&state, ALLEGRO_KEY_UP);
+    last_pressed[Action::ENTER] = al_key_down(&state, ALLEGRO_KEY_ENTER);
+    last_pressed[Action::ESCAPE] = al_key_down(&state, ALLEGRO_KEY_ESCAPE);
 
-		last_pressed[Action::DOWN] = al_key_down(&state, ALLEGRO_KEY_DOWN);
-		last_pressed[Action::UP] = al_key_down(&state, ALLEGRO_KEY_UP);
-		last_pressed[Action::ENTER] = al_key_down(&state, ALLEGRO_KEY_ENTER);
-		last_pressed[Action::ESCAPE] = al_key_down(&state, ALLEGRO_KEY_ESCAPE);
+    return ret;
+  }
 
-		return ret;
-	}
+  Action PlayingKeyboard::input() {
+    static bool escape_was_pressed = false;
 
-	Action PlayingKeyboard::input() {
+    // change this escape
+    if (!al_key_down(&state, ALLEGRO_KEY_ESCAPE)
+      && escape_was_pressed) {
+      escape_was_pressed = false;
+      return Action::ESCAPE;
+    }
 
-		static bool escape_was_pressed = false;
-
-		// change this escape
-		if (!al_key_down(&state, ALLEGRO_KEY_ESCAPE)
-			&& escape_was_pressed) {
-			escape_was_pressed = false;
-			return Action::ESCAPE;
-		}
-
-		escape_was_pressed = al_key_down(&state, ALLEGRO_KEY_ESCAPE);
+    escape_was_pressed = al_key_down(&state, ALLEGRO_KEY_ESCAPE);
 
 
-		if (al_key_down(&state, ALLEGRO_KEY_SPACE)) 
-			ship.shoot();
+    if (al_key_down(&state, ALLEGRO_KEY_SPACE)) 
+      ship.shoot();
 
-		ship.dir = vector(0.0f, 0.0f) + 
-			al_key_down(&state, ALLEGRO_KEY_UP) * vector(0.0f, -1.0f) + 
-			al_key_down(&state, ALLEGRO_KEY_DOWN) * vector(0.0f, 1.0f) + 
-			al_key_down(&state, ALLEGRO_KEY_LEFT) * vector(-1.0f, 0.0f) +
-			al_key_down(&state, ALLEGRO_KEY_RIGHT) * vector(1.0f, 0.0f);
-		
-		if (ship.dir != vec3()) 
-			ship.dir.normalize();
-		
-		return Action::NOTHING;
-	}
+    ship.dir = vector(0.0f, 0.0f) + 
+      al_key_down(&state, ALLEGRO_KEY_UP) * vector(0.0f, -1.0f) + 
+      al_key_down(&state, ALLEGRO_KEY_DOWN) * vector(0.0f, 1.0f) + 
+      al_key_down(&state, ALLEGRO_KEY_LEFT) * vector(-1.0f, 0.0f) +
+      al_key_down(&state, ALLEGRO_KEY_RIGHT) * vector(1.0f, 0.0f);
+
+    if (ship.dir != vec3()) {
+      ship.dir.normalize();
+    }
+
+    return Action::NOTHING;
+  }
 }

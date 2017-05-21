@@ -6,11 +6,11 @@
 #include <iostream>
 
 namespace math {
-	
-	std::ostream& operator<< (std::ostream& stream, const vec3& v) {
-		stream << "(" << v.x << ", " << v.y << ", " << v.z << ")";
-		return stream;
-	}
+
+  std::ostream& operator<< (std::ostream& stream, const vec3& v) {
+    stream << "(" << v.x << ", " << v.y << ", " << v.z << ")";
+    return stream;
+  }
 }
 
 
