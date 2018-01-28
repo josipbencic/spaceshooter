@@ -6,13 +6,13 @@ Some unnecessary optimizations might be found in the codebase (such as cache-fri
 
 # SETUP #
 
-It was tested with Visual Studio 15. 
+Allegro is an open-source game development library.
+The game was built with Visual Studio 15. 
 Download Allegro 5.1 version from Allegro Game Programming Libary site, and place /include and /lib in Spaceshooter/Allegro folder.
-After compiling, copy allegro monolith-5.1.dll from Allegro folder to Release.
-Unce upon a time, this also worked on Linux, however I had too much problems with library linking and I have abandoned it.
+After building, copy allegro monolith-5.1.dll from Allegro folder to Release.
+Unce upon a time, this also worked on Linux (as Allegro also works on linux), so there should be no problem porting it if 
 
-# ART AND OTHER #
+# RESOURCES #
 
-I grabbed font from 1001 fonts, where no copyright was requested.
-SFX were made with Bfxr.
-Some art I made, while other stayed from the Mike Geig's tutorial.
+Sound effects I made with Bfxr and I grabbed fonts from 1001 fonts.
+Some art I made, while other stayed from the tutorial.
